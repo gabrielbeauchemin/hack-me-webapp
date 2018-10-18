@@ -1,0 +1,55 @@
+<div class="container-fluid ">
+    <div class="mx-auto text-center">
+        <input id="adresse" size="90%" value={{innerurl}} style="margin: 20px"> </input>
+        <button id="goBtn" onclick="soumettreRequete()">Go!</button>
+
+        <p class="mx-auto text-left">
+            <p id="goback" onclick="goBack()" style="color: blue; text-decoration: underline"></p>
+        </p>
+            
+        <h3>Table des matières</h3>
+        <p onclick="ancrer('vin')" style="color: blue; text-decoration: underline">Liste de vins</p>
+        <p onclick="ancrer('voyages')" style="color: blue; text-decoration: underline">Idées de voyages</p>
+        <p onclick="ancrer('cadeaux')" style="color: blue; text-decoration: underline">Cadeaux funéraires</p>
+
+        <script>
+            var ancragePrecedent = "";
+            function ancrer(s) {
+                ancragePrecedent = location.hash;
+                backlink = document.getElementById("goback");
+                if(ancragePrecedent) {
+                    backlink.innerHTML = "Retour en arrière: " + ancragePrecedent.substring(1);
+                }
+                location.hash = s;
+                innerurl = document.getElementById("adresse").value;
+                if(innerurl.indexOf("#") > 0) {
+                    innerurl = innerurl.substring(0, innerurl.indexOf("#"));
+                }
+                document.getElementById("adresse").value = innerurl + location.hash;
+            }
+
+            function goBack() {
+                var ancragePrecedent = document.getElementById("goback").innerHTML;
+                ancragePrecedent = ancragePrecedent.substring(ancragePrecedent.indexOf("Retour en arrière : ") + 20)
+                document.getElementById("goback").innerHTML = "";
+                location.hash = ancragePrecedent;
+                var innerurl = document.getElementById("adresse").value;
+                if(innerurl.indexOf("#") > 0) {
+                    innerurl = innerurl.substring(0, innerurl.indexOf("#"));
+                }
+                document.getElementById("adresse").value = innerurl + location.hash;
+            }
+
+            function soumettreRequete() {
+                var url = document.getElementById("adresse").value;
+                var hashIndex = url.indexOf("#");
+                if(hashIndex > 0) {
+                    backlink = document.getElementById("goback");
+                    var hash = url.substring(hashIndex + 1);
+                    backlink.innerHTML = "Retour en arrière: " + hash;
+                    location.hash = backlink.innerHTML;
+                }
+            }
+        </script>
+    </div>
+</div>

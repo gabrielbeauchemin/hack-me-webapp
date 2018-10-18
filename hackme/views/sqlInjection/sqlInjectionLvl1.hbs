@@ -1,0 +1,68 @@
+ {{#if successLogin}}
+<script>
+    window.onload = function () {
+        swal({
+            title: "Authentification réussie",
+            text: "Authentifié en tant qu'usager: {{username}}.\nVous pouvez passer au prochain niveau.",
+            icon: "success",
+        })
+    };
+</script> {{else if invalidLogin}}
+<script>
+    window.onload = function () {
+        swal({
+            title: "Authentification refusée",
+            text: "Mauvaise combinaison de nom d'usager / mot de passe.",
+            icon: "warning",
+        })
+    };
+</script> {{else if failedLogin}}
+<script>
+    window.onload = function () {
+        swal({
+            title: "{{errCode}}",
+            text: "{{{errMessage}}}",
+            icon: "error"
+        })
+    };
+</script> {{/if}}
+
+
+<div class="container-fluid">
+    <div class="mx-auto text-center">
+        <h1 class="display-4">Injection SQL Niveau 1
+            <br/>Briser l'authenficiation</h1>
+        <p>Plus d'information
+            <a href="https://fr.wikipedia.org/wiki/Injection_SQL">https://fr.wikipedia.org/wiki/Injection_SQL</a>
+        </p>
+        <p class="lead">Le but de cet exercice est de réussir à vous connecter.</p>
+    </div>
+    <div class="marginLeft">
+        <p class="text-justify">
+            Vous devez réussir à vous connecter en exploitant la requête d'authenficiation générée lors de la tentative de connection
+            d'un utilisateur.
+
+        </p>
+        <p class="text-justify">
+            <b>Indice:</b> Vous suspectez que l'application est mal protégée contre l'injection SQL, alors un bon point de départ
+            pour l'attaque serait de tester la robustesse de la requête d'authenficiation...
+
+        </p>
+
+        <form name="answer" action="/sqlInjection/lvl1/Answer" method="post">
+            <div class="form-group">
+                <label for="uname">
+                    <b>Nom d'utilisateur</b>
+                </label>
+                <input type="text" placeholder="Entrez votre nom d'utilisateur" name="username" required class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="psw">
+                    <b>Mot de passe</b>
+                </label>
+                <input type="password" placeholder="Entrez votre mot de passe" name="password" required class="form-control">
+            </div>
+            <button type="submit" class="btn btn-primary">Connexion</button>
+        </form>
+    </div>
+</div>

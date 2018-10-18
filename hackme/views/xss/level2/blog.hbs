@@ -1,0 +1,45 @@
+<div class="container-fluid ">
+    <div class="mx-auto text-center">
+        <input id="entreeMessage" type="text" size="60%" class="px-3 py-3 h3 pt-md-2 text-center"></input>
+        <button id="submitBtn" onclick="submitPost()">Post!</button>
+        <ol id="tableMessages">
+        </ol>
+        <button id="clearBtn" onclick="clearPosts()">Effacer la liste de messages</button>
+
+        <script>
+            var posts = "{{ posts }}";
+            if(posts) {
+                var messages = posts.split(",");
+                table = document.getElementById("tableMessages");
+                messages.forEach(function(m) {
+                    message = m.replace(new RegExp(/&#44;/, 'g'), ",").replace(new RegExp(/%20/, 'g'), " ");
+                    message = message.replace(new RegExp(/%20/, 'g'), " ");
+                    message = message.replace(new RegExp(/&lt;/, 'g'), "<");
+                    message = message.replace(new RegExp(/&gt;/, 'g'), ">");
+                    message = message.replace(new RegExp(/&#x3D;/, 'g'), "=");
+                    message = message.replace(new RegExp(/&quot;/, 'g'), "\"");
+                    table.innerHTML += "<li>" + message + "</li>";
+                });
+            }
+
+            function submitPost() {
+                var url = location.href;
+                var message = document.getElementById("entreeMessage").value;
+                message = message.replace(new RegExp(/,/, 'g'), "&#44;");
+                message = message.replace(new RegExp(/ /, 'g'), "%20");
+                if(url.indexOf("?") > 0) {
+                     url = url.substring(0, location.href.indexOf("?"));
+                }
+                location.href = url + "?post=" + message;
+            }
+
+            function clearPosts() {
+                var url = location.href
+                if(url.indexOf("?") > 0) {
+                    url = url.substring(0, location.href.indexOf("?"));
+                }
+                location.href = url + "?clear";
+            }
+        </script>
+    </div>
+</div>

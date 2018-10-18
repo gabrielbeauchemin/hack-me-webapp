@@ -1,0 +1,65 @@
+{{#if successLogin}}
+    <script>
+        window.onload = function () {
+            swal("Bravo, vous avez réussi à vous connecter!", "Passez au prochain niveau.", "success");
+        };
+    </script>
+{{/if}}
+<div class="container-fluid">
+    <div class="mx-auto text-center">
+        <h2>Brute Force Niveau 1: <br/> Situation utopique</h2>
+    </div>
+
+    <div class="marginLeft">
+        <p class="">
+            Vous devez vous connecter, sans vous inscrire. Pour y arriver, vous avez volé grâce à de l'injection Sql
+            le mot de passe hashé d'un utilisateur nommé "gryzay".
+
+        </p>
+        <p>Le mot de passe hashé est:</p>
+        <p>"7f24a06c959ba77ed33e1dd4150bdb053b2f5874abe765e43ad38ce1d2f0725d".</p>
+        <p class="">Sachant que:</p>
+        <ul class="">
+            <li>Le mot de passe a été hashé à partir de la concaténation du nom d'utilisateur suivi du mot de passe.
+            </li>
+            <li>Le site n'a pas ajouté salage au hashing.</li>
+            <li>Le mot de passe en clair est composé seulement de six lettres minuscules ou moins.</li>
+            <li>L'algorithme de hashing utilisée est sha256.</li>
+        </ul>
+        <p class="">
+            <b>
+                Écrivez un programme pour déchiffrer le mot de passe hashé. Inscrivez le ci-dessous pour vérifier sa
+                validité.
+            </b>
+        </p>
+    </div>
+
+    {{!-- Login Form --}}
+    {{#if failedLogin}}
+        <script>
+            swal("Erreur", "Utilisateur ou mot de passe invalide", "error");
+        </script>
+        <p class="center" style="color:red;" id="loginFailed">Utilisateur ou mot de passe invalide</p>
+    {{/if}}
+    {{#if invalidLogin}}
+        <p class="center" style="color:red;" id="invalidLogin">Vous avez essayé trop de fois avec le mauvais mot de
+            passe. Veuillez réessayer dans dix minutes.</p>
+    {{/if}}
+    <div class="marginLeft">
+        <form name="login" action="/bruteForce/lvl1/EvaluateAnswer" method="post">
+            <div class="form-group">
+                <label for="uname"><b>Username</b></label>
+                <input type="text" value="gryzay" name="username" required class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="psw"><b>Password</b></label>
+                <input type="password" placeholder="Enter Password" name="password" required class="form-control">
+            </div>
+            <button type="submit" class="btn btn-primary">Login</button>
+        </form>
+    </div>
+</div>
+
+
+
+

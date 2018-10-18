@@ -1,0 +1,81 @@
+ {{#if failedInfoQuery}}
+<script>
+    window.onload = function () {
+        swal({
+            title: "{{errCode}}",
+            text: "{{{errMessage}}}",
+            icon: "error"
+        })
+    };
+</script> {{/if}}
+
+<div class="container-fluid">
+    <div class="mx-auto text-center">
+        <h1 class="display-4">Injection SQL Niveau 3
+            <br/>Au-delà de l'injection SQL</h1>
+        <p>Plus d'information
+            <a href="https://fr.wikipedia.org/wiki/Injection_SQL">https://fr.wikipedia.org/wiki/Injection_SQL</a>
+        </p>
+        <p class="lead">Le but de cet exercice est de modifier le contenu de la base de données.</p>
+    </div>
+    <div class="marginLeft">
+        <p class="text-justify">
+            Dans les 2 niveaux précédents, nous avons vu comment exploiter l'injection SQL pour accéder à de l'information à laquelle
+            nous n'aurions pas accès dans un temps normal. Cependant, l'injection SQL peut être utilisée à d'autres fins,
+            notamment pour modifier le contenu des bases de données.
+
+        </p>
+        <p class="text-justify">
+            Dans cet exercice, le but est d'injecter un script XSS dans un champ de la base de données. Une fois le script sauvegardé
+            de façon permanente dans la base de données, il pourrait éventuellement être exécuté dans le navigateur web de
+            n'importe quel client désirant afficher ce champ particulier de la base de données.
+
+        </p>
+        <p class="text-justify">
+            Pour réaliser cette injection, vous tirer profit des informations que vous avez obtenues sur les métadonnées de la base de
+            données, collectées de la même façon que le nom de la table au niveau 2. Les informations pertinentes à votre
+            attaque sont les suivantes:
+        </p>
+        <ul class="">
+            <li>La table "users" du niveau précédent la table dans laquelle on veut insérer;</li>
+            <li>Chaque utilisateur est décrit par un nom d'utilisateur (colonne "user") et un champ d'information (colonne "information");</li>
+            <li>Il existe un utilisateur "test1";</li>
+            <li>Le script XSS à injecter est: &lt;script&gt;alert(&quot;F&eacute;licitations! Vous avez compl&eacute;t&eacute;
+                les 3 niveaux!&quot;)&lt;/script&gt;.</li>
+        </ul>
+        <p class="text-justify">
+
+            Le script XSS que vous voulez insérer est un simple script provoquant l'affichage d'une alerte par le navigateur web. Vous
+            pouvez cependant vous imaginer qu'un script malicieux, entraînant des conséquences autrement plus importantes
+            s'il venait à être exécuter, pourrait être injecté tout aussi facilement.
+        </p>
+
+        <form name="display" action="/sqlInjection/lvl3/Display" method="post">
+            <div class="form-group">
+                <label for="uname">
+                    <b>Nom d'utilisateur</b>
+                </label>
+                <input type="text" placeholder="Entrez votre nom d'utilisateur" name="username" required class="form-control">
+            </div>
+            <button type="submit" class="btn btn-primary">Afficher</button>
+        </form>
+        <br/>
+        <div class="table">
+            <table>
+                <thead>
+                    <th>Nom d'utilisateur</th>
+                    <th>Information</th>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>{{username}}</td>
+                        <td>{{{userinfo}}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <br/>
+        <br/>
+    </div>
+</div>
+</div>

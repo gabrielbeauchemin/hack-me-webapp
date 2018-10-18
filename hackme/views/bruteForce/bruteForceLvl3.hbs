@@ -1,0 +1,62 @@
+{{#if successLogin}}
+    <script>
+        window.onload = function () {
+            swal("Bravo, vous avez réussi à vous connecter!", "Vous avez fini le tutoriel", "success");
+        };
+    </script>
+{{/if}}
+<div class="container-fluid">
+    <div class="mx-auto text-center">
+        <h2>Brute Force Niveau 3: <br/> Situation réelle</h2>
+    </div>
+
+    <div class="marginLeft">
+        <p>
+            Cette fois, pour vous connecter, vous ne connaissez aucune information concernant les
+            mots de passe. De plus, le site empêche toute tentative de connexion pour un
+            usager qui a essayé de se connecter avec le mauvais mot de passe trois fois de suite
+            pour dix minutes. <Br>
+        </p>
+        <p>
+            Écrivez un programme qui fait une attaque de dictionnaire inversée par appels REST
+            Post en cherchant des utilisateurs ayant un ou des mots de passe populaires. Le site
+            ne bloque pas les adresses IP qui envoient trop de requêtes, donc il n'est pas
+            nécessaire de masquer son adresse IP. Vous avez déjà généré une liste des
+            utilisateurs du site que vous utiliserez pour votre attaque.
+        </p>
+    </div>
+
+    <a class="marginLeft" href="/bruteForce/lvl3/usersSample.txt" download> Cliquez ici pour télécharger la liste des
+        utilisateurs générée </a>
+
+
+    {{!-- Login Form --}}
+    {{#if failedLogin}}
+        <script>
+            swal("Erreur", "Utilisateur ou mot de passe invalide", "error");
+        </script>
+        <p class="center" style="color:red;" id="loginFailed">Utilisateur ou mot de passe invalide</p>
+    {{/if}}
+    {{#if invalidLogin}}
+        <p class="center" style="color:red;" id="invalidLogin">Vous avez essayé trop de fois avec le mauvais mot de
+            passe. Veuillez réessayer dans dix minutes.</p>
+    {{/if}}
+
+    <div class="marginLeft" style="margin-top: 1em">
+        <form name="login" action="/bruteForce/lvl3/EvaluateAnswer" method="post">
+            <div class="form-group">
+                <label for="uname"><b>Username</b></label>
+                <input type="text" value="" name="username" required class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="psw"><b>Password</b></label>
+                <input type="password" placeholder="Enter Password" name="password" required class="form-control">
+            </div>
+            <button type="submit" class="btn btn-primary">Login</button>
+        </form>
+    </div>
+</div>
+
+
+
+

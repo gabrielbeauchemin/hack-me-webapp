@@ -1,0 +1,40 @@
+{{#if successLogin}}
+    <script>
+        window.onload = function () {
+            swal("Bravo, vous avez réussi à vous connecter!", "Passez au prochain niveau.", "success");
+        };
+    </script>
+{{/if}}
+<div class="container-fluid">
+    <div class="mx-auto">
+        <div class="text-center">
+            <h1 class="display-4">Injection NoSQL (MongoDb) Niveau 1</h1>
+            <p>Plus d'information</p>
+            <p><a href="https://www.owasp.org/index.php/Testing_for_NoSQL_injection">www.owasp.org</a></p>
+            <p><a href="https://docs.mongodb.com/manual/">https://docs.mongodb.com/manual/</a></p>
+            <p><a href="https://zanon.io/posts/nosql-injection-in-mongodb">https://zanon.io/posts/nosql-injection-in-mongodb</a></p>
+            <p class="marginLeft">
+                Vous devez vous connecter, sans vous inscrire. Vous pouvez utiliser le nom d'utilisateur "emil89".
+            </p>
+            <p class="lead">Le but de cette exercice est de réussir à vous connecter.</p>
+        </div>
+
+        {{#if failedLogin}}
+            <script>
+                swal("Erreur", "Utilisateur ou mot de passe invalide", "error");
+            </script>
+            <p class="center" style="color:red;" id="loginFailed">Utilisateur ou mot de passe invalide</p>
+        {{/if}}
+        <form class="marginLeft" action="/mongo/lvl1/EvaluateAnswer" method="post">
+            <div class="form-group">
+                <label for="uname"><b>Username</b></label>
+                <input type="text" name="username" value="emil89" required class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="psw"><b>Password</b></label>
+                <input type="password" placeholder="Enter Password" name="password" required class="form-control">
+            </div>
+            <button type="submit" class="btn btn-primary" cl>Submit</button>
+        </form>
+    </div>
+</div>

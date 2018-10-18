@@ -1,0 +1,41 @@
+<div class="container-fluid">
+    <div class="mx-auto text-center">
+        <h1 class="display-4">Cross-Site Scripting Niveau 2 : 
+            <a href="https://www.owasp.org/index.php/Cross-site_Scripting_(XSS)#Stored_XSS_Attacks" target="_blank">
+                    XSS stocké
+                </a>
+        </h1>
+        <p class="lead">
+            Le but de cette exercice est de réussir à stocker un script exécutant un alert() au chargement de la page.
+        </p>
+        <button id="nextLvlBtn" class="mx-auto text-center" style="display: none" onclick="nextLevel()">Prochain niveau</button>
+        <p id="abc" class="h4">
+            <b>Indices:</b>
+        </p>
+            <p>
+                Le iframe utilisé dans cette page prévient l'injection d'un script dans un paramètre.
+            </p>
+            <p>
+                Consultez cette ressource s'il vous faut de l'inspiration: 
+                <a href="https://www.owasp.org/index.php/XSS_Filter_Evasion_Cheat_Sheet" target="_blank">
+                    XSS Filter Evasion Cheat Sheet
+                </a>
+            </p>
+        
+        <iframe id="lvl2Frame" src="blog" title="iframe example 2" onload="overrideIFrameAlert()" width="70%" height="400vh" style="margin: 20px"></iframe>
+        <script>
+            function overrideIFrameAlert() {
+                var iframewindow = document.getElementById("lvl2Frame").contentWindow;
+                var _alert = iframewindow.alert;
+                iframewindow.alert = function() {
+                    _alert("Bravo! Vous pouvez passer au prochain exercice.");
+                    document.getElementById("nextLvlBtn").style.display = "block";
+                }
+            }
+
+            function nextLevel() {
+                location.href = location.href.replace("lvl2", "lvl3");
+            }
+        </script>
+    </div>
+</div>

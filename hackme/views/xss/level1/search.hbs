@@ -1,0 +1,35 @@
+<div class="container-fluid ">
+    <div class="mx-auto text-center">
+        <input id="adresse" size="90%" value={{innerurl}} style="margin: 20px"> </input>
+
+        <div class="px-3 py-3 pt-md-2 pb-md-4 mx-auto text-center">
+            <p class="h1">Cherchez un groupe de prière!</p>
+        </div>
+        <div class="px-3 py-3 pt-md-1 pb-md-1 mx-auto text-center"></div>
+            <input id="barreRecherche" size="50%" placeholder="Entrez votre région"> </input>
+            <button id="submitBtn" onclick="envoyerRecherche()" style="background-color: powderblue">Go!</button>
+        </div>
+        <p id="resultat" class="px-3 py-3 h3 pt-md-2 text-center"></p>
+
+        <script>
+            function envoyerRecherche() {
+                var url = "http://www.allume-feu-sacre.net"
+                var query = document.getElementById("barreRecherche").value.trim().replace(new RegExp(" ", 'g'), "%20");
+                if(query) {
+                    url += query;
+                }
+                if(location.href.indexOf("?recherche=") > 0) {
+                    location.href = location.href.substring(0, location.href.indexOf("?recherche=") + 11) + query;
+                } else {
+                    location.href += "?recherche=" + query;
+                }
+            }
+
+            var url = document.getElementById("adresse").value;
+            if(url.indexOf("?recherche=") > 0) {
+                var recherche = url.substring(url.indexOf("?recherche=") + 11).replace(new RegExp("%20", 'g'), " ");
+                document.getElementById("resultat").innerHTML = "Aucuns fervents chrétiens trouvés dans: " + recherche;
+            }
+        </script>
+    </div>
+</div>

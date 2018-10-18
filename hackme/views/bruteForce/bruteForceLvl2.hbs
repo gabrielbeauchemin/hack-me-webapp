@@ -1,0 +1,50 @@
+{{#if successLogin}}
+    <script>
+        window.onload = function () {
+            swal("Bravo, vous avez réussi à vous connecter!", "Passez au prochain niveau.", "success");
+        };
+    </script>
+{{/if}}
+<div class="container-fluid">
+    <div class="mx-auto text-center">
+        <h2>Brute Force Niveau 2: <br/> Situation semi-réelle </h2>
+    </div>
+
+    <div class="marginLeft">
+        <p class="">
+            Vous avez vu un utilisateur se connecter sur ce site et avez vu son utilisateur et une partie de son
+            mot de passe. Son utilisateur est "arkyblueyes1257". Son mot de passe commence par "mhch"
+            et est suivi de trois chiffres que vous avez manqués. Vous savez que le site actuel n'est pas moderne
+            et sécurisé. Il n'y a aucune limite de nombre d'essais de mots de passe avant que la connexion ne soit
+            interdite pour un certain temps.
+        </p>
+        <p class="">
+            Écrivez un programme pour essayer toutes les combinaisons possibles en faisant des appels REST Post
+            à la ressource du site responsable de la connexion. Pour déterminer si le mot de passe est le bon, comme
+            au niveau précédent, un script lancera une alerte indiquant que vous avez réussi.
+        </p>
+    </div>
+
+    {{!-- Login Form --}}
+    {{#if failedLogin}}
+        <script>
+            swal("Erreur", "Utilisateur ou mot de passe invalide", "error");
+        </script>
+        <p class="center" style="color:red;" id="loginFailed">Utilisateur ou mot de passe invalide</p>
+    {{/if}}
+    <div class="marginLeft">
+        <form name="login" action="/bruteForce/lvl2/EvaluateAnswer" method="post">
+            <div class="form-group">
+                <label for="uname"><b>Username</b></label>
+                <input type="text" value="arkyblueyes1257" name="username" required class="form-control"></div>
+            <div class="form-group">
+                <label for="psw"><b>Password</b></label>
+                <input type="password" placeholder="Enter Password" name="password" required class="form-control"></div>
+            <button class="btn btn-primary" type="submit">Login</button>
+        </form>
+    </div>
+</div>
+
+
+
+
